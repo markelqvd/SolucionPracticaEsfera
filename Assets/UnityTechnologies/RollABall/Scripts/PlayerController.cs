@@ -5,12 +5,16 @@ using UnityEngine.UI;
 
 using System.Collections;
 
+using UnityEngine.Events;
+
 public class PlayerController : MonoBehaviour {
 	
 	// Create public variables for player speed, and for the Text UI game objects
 	public float speed;
 	public Text countText;
 	public Text winText;
+
+	public UnityEvent OnCuboRecogido;
 
 	// Create private references to the rigidbody component on the player, and the count of pick up objects picked up so far
 	private Rigidbody rb;
@@ -51,6 +55,7 @@ public class PlayerController : MonoBehaviour {
 	// store a reference to that collider in a variable named 'other'..
 	void OnTriggerEnter(Collider other) 
 	{
+		OnCuboRecogido.Invoke();
 		// ..and if the game object we intersect has the tag 'Pick Up' assigned to it..
 		if (other.gameObject.CompareTag ("Pick Up"))
 		{
